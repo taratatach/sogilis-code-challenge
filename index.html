@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Notre super labyrinthe</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="fa/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <script type="text/javascript" src="script.js"></script>
+  </head>
+  <body>
+    <form action="#" name="display">
+      <p>
+        <input type="text" id="maze-json" value="" placeholder="Enter maze JSON here" />
+      </p>
+      <p>
+        <label for="start"><i class="fa fa-wheelchair-alt" aria-hidden="true"></i></label>
+        <input type="text" id="start" value="" placeholder="Enter start coordinates" />
+      </p>
+      <p>
+        <label for="end"><i class="fa fa-flag-checkered" aria-hidden="true"></i></label>
+        <input type="text" id="end" value="" placeholder="Enter end coordinates" />
+      </p>
+      <p>
+        <input type="submit" value="Display" id="maze-display" />
+      </p>
+    </form>
+
+    <div id="maze"></div>
+
+    <template id="flag-start">
+      <i class="flag flag-start fa fa-wheelchair-alt" aria-hidden="true"></i>
+    </template>
+    <template id="flag-end">
+      <i class="flag flag-end fa fa-flag-checkered" aria-hidden="true"></i>
+    </template>
+  </body>
+</html>
