@@ -129,9 +129,50 @@ view model =
 
 viewMaze : Model -> Html Msg
 viewMaze model =
-  div [ style [("position", "relative"), ("margin-top", "50px"), ("margin-left", "50px")] ] (List.map viewBlock model.currentMaze.description)
+  let
+    style =
+      [ ( ".maze", 
+          [ ("position", "relative")
+          , ("margin-top", "50px")
+          , ("margin-left", "50px")
+          ]
+        )
+      ]
+  in
+    div [ class "maze" ] 
+      ( (scopedStyle style) 
+      :: (List.map viewBlock model.currentMaze.description)
+      )
 
 viewBlock : (Point, Directions) -> Html msg
 viewBlock (point, directions) =
-  div [ style [("position", "absolute"), ("background", "grey"), ("left", (toString (50 * point.y)) ++ "px"), ("top", (toString (50 * point.x)) ++ "px"), ("width", "50px"), ("height", "50px")] ] []
+  let
+    style =
+      [ ( "div",
+          [ ("position", "absolute")
+          , ("box-sizing", "border-box")
+          , ("background", "grey")
+          , ("left", (toString (50 * point.y)) ++ "px")
+          , ("top", (toString (50 * point.x)) ++ "px")
+          , ("width", "50px")
+          , ("height", "50px")
+          , ("border-top",    if List.member N directions then "none" else "2px solid blue")
+          , ("border-right",  if List.member E directions then "none" else "2px solid blue")
+          , ("border-bottom", if List.member S directions then "none" else "2px solid blue")
+          , ("border-left",   if List.member W directions then "none" else "2px solid blue")
+          ]
+        )
+      ]
+  in
+    div [] [ scopedStyle style ]
 
+scopedStyle : List (String, List (String, String)) -> Html msg
+scopedStyle styles =
+  node "style" [ attribute "scoped" "" ] (List.map selectorStyleToCss styles)
+
+selectorStyleToCss : (String, List (String, String)) -> Html msg
+selectorStyleToCss (selector, properties) =
+  let
+    propertiesAsCss = String.join " " (List.map (\(p, v) -> p ++ ": " ++ v ++ ";") properties)
+  in
+    text (selector ++ " { " ++ propertiesAsCss ++ " }")
