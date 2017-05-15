@@ -131,14 +131,14 @@ viewMaze : Model -> Html Msg
 viewMaze model =
   let
     style =
-      [ ( ".maze", 
-          [ ("position", "relative")
+      [ ( ".maze"
+        , [ ("position", "relative")
           , ("margin-top", "50px")
           , ("margin-left", "50px")
           ]
         )
-      , ( ".maze--block",
-          [ ("position", "absolute")
+      , ( ".maze--block"
+        , [ ("position", "absolute")
           , ("box-sizing", "border-box")
           , ("background", "grey")
           , ("width", "50px")
@@ -156,8 +156,8 @@ viewBlock : (Point, Directions) -> Html msg
 viewBlock (point, directions) =
   let
     style =
-      [ ( ".maze--block",
-          [ ("left", (toString (50 * point.y)) ++ "px")
+      [ ( ".maze--block"
+        , [ ("left", (toString (50 * point.y)) ++ "px")
           , ("top", (toString (50 * point.x)) ++ "px")
           , ("border-top",    if List.member N directions then "none" else "2px solid blue")
           , ("border-right",  if List.member E directions then "none" else "2px solid blue")
