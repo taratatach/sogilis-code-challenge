@@ -137,6 +137,14 @@ viewMaze model =
           , ("margin-left", "50px")
           ]
         )
+      , ( ".maze--block",
+          [ ("position", "absolute")
+          , ("box-sizing", "border-box")
+          , ("background", "grey")
+          , ("width", "50px")
+          , ("height", "50px")
+          ]
+        )
       ]
   in
     div [ class "maze" ] 
@@ -148,14 +156,9 @@ viewBlock : (Point, Directions) -> Html msg
 viewBlock (point, directions) =
   let
     style =
-      [ ( "div",
-          [ ("position", "absolute")
-          , ("box-sizing", "border-box")
-          , ("background", "grey")
-          , ("left", (toString (50 * point.y)) ++ "px")
+      [ ( ".maze--block",
+          [ ("left", (toString (50 * point.y)) ++ "px")
           , ("top", (toString (50 * point.x)) ++ "px")
-          , ("width", "50px")
-          , ("height", "50px")
           , ("border-top",    if List.member N directions then "none" else "2px solid blue")
           , ("border-right",  if List.member E directions then "none" else "2px solid blue")
           , ("border-bottom", if List.member S directions then "none" else "2px solid blue")
@@ -164,7 +167,7 @@ viewBlock (point, directions) =
         )
       ]
   in
-    div [] [ scopedStyle style ]
+    div [ class "maze--block" ] [ scopedStyle style ]
 
 scopedStyle : List (String, List (String, String)) -> Html msg
 scopedStyle styles =
